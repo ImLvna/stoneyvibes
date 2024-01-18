@@ -38,6 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-cloudflare": "^4.0.2",
 		"axios": "0.26.1",
 		"axios-cookiejar-support": "^5.0.0",
 		"moment": "^2.30.1",
