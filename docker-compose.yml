@@ -1,0 +1,12 @@
+version: "3"
+services:
+  stoneyvibes:
+    restart: always
+    build: /servers/stoneyvibes
+    hostname: stoneyvibes
+    env_file: stack.env
+    networks:
+      - nginx
+networks:
+  nginx:
+    external: true
