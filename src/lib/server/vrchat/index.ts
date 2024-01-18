@@ -25,12 +25,16 @@ const ClientInitalizer = new OpenAPIClientAxios({definition: ClientSpec as unkno
 	},
 	jar
 }});
-export const Client = ClientInitalizer.init<ClientType>().then(wrapper).then(async (client) => {
+export const Client = ClientInitalizer.init<ClientType>().then(wrapper)
+let initalised = false;
+export async function init() {
+	if (initalised) return;
+	const client = await Client;
 	await client.getCurrentUser(undefined, undefined, {
 		headers: {
 			Authorization: `Basic ${btoa(`${encodeURIComponent(VRCHAT_USERNAME)}:${encodeURIComponent(VRCHAT_PASSWORD)}`)}`,
 		},
 	});
 	await client.verify2FA(undefined, {code: getTotp()});
-	return client;
-});
+	initalised = true;
+}

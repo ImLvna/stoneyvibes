@@ -1,10 +1,11 @@
 import { PARTNER_GROUPS } from '$lib/constants';
-import { Client } from '$lib/server/vrchat';
+import { Client, init } from '$lib/server/vrchat';
 import type { OwnedGroup } from '$lib/vrchat/group';
 // import { AuthenticationApi } from '$lib/server/vrchat';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
+	await init();
 	const client = await Client;
 	const partnerGroups = (await Promise.all(PARTNER_GROUPS.map(async (id) => {
 		const group = (await client.getGroup(id)).data;
@@ -17,3 +18,5 @@ export const load: PageServerLoad = async () => {
 			partnerGroups,
 	};
 };
+
+export const prerender = false;

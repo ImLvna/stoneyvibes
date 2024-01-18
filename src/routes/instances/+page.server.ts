@@ -1,10 +1,11 @@
 import { GROUP_ID, PARTNER_GROUPS } from '$lib/constants';
-import { Client } from '$lib/server/vrchat';
+import { Client, init } from '$lib/server/vrchat';
 import type { ModeratedInstance } from '$lib/vrchat/instance';
 // import { AuthenticationApi } from '$lib/server/vrchat';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
+	await init();
 	const client = await Client;
 	const modsOnline = (await client.getFriends({offline: false})).data;
 	const instances = (await client.getGroupInstances(GROUP_ID)).data.map((instance) => {
@@ -34,3 +35,5 @@ export const load: PageServerLoad = async () => {
 			partnerInstances: partnerInstances.filter(({ instances }) => instances.length > 0),
 	};
 };
+
+export const prerender = false;
