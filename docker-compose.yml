@@ -4,6 +4,7 @@ services:
     restart: always
     build: .
     hostname: stoneyvibes
+    env_file: stack.env
     networks:
       - nginx
 networks:
