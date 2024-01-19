@@ -1,9 +1,9 @@
 version: "3"
 services:
-  vrchat-group-website:
+  stoneyvibes:
     restart: always
     build: .
-    hostname: vrcgroup
+    hostname: stoneyvibes
     networks:
       - nginx
 networks:
